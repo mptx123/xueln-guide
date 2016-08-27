@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>期望Ta</title>
+<meta http-equiv="Content-Type" name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,
+maximum-scale=1.0,target-densitydpi=device-dpi" charset="utf-8"/>
+<style>
+body,p,h1,h2,h3,h4,h5,h6,dl,dd{margin:0;font-size:12px;}
+ol,ul{list-style:none;margin:0;padding:0;}
+a{text-decoration:none}
+img{border:none}
+body{
+    font-size:16px;
+    fons-family:'宋体'
+}
+ul{
+    box-sizing:border-box;
+	height:100%;
+}
+li{
+    border-bottom:1px solid #ccc;
+    padding:10px;
+
+}
+
+span:not(.not){
+    display:inline-block;
+    width:35%;
+}
+.borderbottom{
+border:none;
+border-bottom:1px solid #ccc;
+width:20%;
+}
+
+input[type='text']:not(.borderbottom){
+width:55%;
+border:none;
+}
+label{
+display:inline-block;
+width:20px;
+height:18px;
+text-align:center;
+}
+img{
+vertical-align:middle;
+margin-left:8px;
+}
+.taller{
+height:42px;
+}
+#float{
+width:80%;
+height:500px;
+position:absolute;
+left:10%;
+top:10px;
+display:none;
+background:white;
+}
+p#age{
+height:10%;
+}
+p.w{
+height:10%;
+}
+input[type='button']{
+display:block;
+width:150px;
+height:35px;
+background:#CE0000;
+margin:10px auto;
+border:none;
+border-radius:3px;
+color:white;
+}
+</style>
+
+<link href='' type='text/css' rel='stylesheet'/>
+<script src='ajax.js'></script>
+<script>
+window.onload=function(){
+   var oImg=document.getElementsByTagName('img');
+   var oDiv=document.getElementById('float');
+   var oSave=document.getElementById('save');
+   var the
+   for(var i=0;i<oImg.length;i++){
+	oImg[i].onclick=function(ev){
+	var ev=ev||event;
+	ev.cancelBubble=true;
+	oDiv.style.display='block';
+	document.body.style.background='rgba(0,0,0,0.3)';
+  
+	if(this.className='weit'){
+		oDiv.innerHTML='';
+		oDiv.innerHTML='<p class="w"><input type="radio"/>胖胖哒</p><p class="w"><input type="radio"/>瘦瘦哒</p><p class="w"><input type="radio"/>不胖不瘦哒</p>'
+		
+	}
+	if(this.className='school'){
+		oDiv.innerHTML='';
+		oDiv.innerHTML='<p class="w"><input type="radio"/>大专</p><p class="w"><input type="radio"/>本科</p><p class="w"><input type="radio"/>硕士研究僧</p>'
+	
+	}
+    if(this.className='age'){
+        oDiv.innerHTML='';
+        for(var j=0;j<10;j++){
+            
+            var oP=document.createElement('p');
+            oP.innerHTML='<input type="radio"/>198'+j;
+            oDiv.appendChild(oP);
+            oP.id='age';
+        }
+        
+    }
+	}
+   }
+   document.onclick=function(){
+	oDiv.style.display='none';
+	document.body.style.background='transparent';
+   }
+  console.log(document.cookie)
+}
+
+</script>
+</head>
+<body>
+<ul>
+    <li class='row'>
+        <span class='text'>出生年范围</span>
+		<span class='not'>1989</span><img src='down.png' class='button age'/>
+		<label>-</label>
+		<span class='not'>1989</span><img src='down.png' class='button age'/>
+		<label>年</label> 
+    </li>
+    <li class='row'>
+        <span class='text'>身高范围</span>
+		<input type='text' class='borderbottom'/><label>-</label><input type='text' class='borderbottom'/><label>cm</label>
+    </li>
+    <li class='row'>
+        <span class='text'>胖瘦程度</span>
+        <span>请选择</span><img src='down.png' class='button weit'/>
+    </li>
+    <li class='row'>
+        <span class='text'>星座</span><input type='text'/>
+    </li>
+    <li class='row'>
+         <span class='text'>外形要求</span><input class='taller' type='text' placeholder='如：长相气质性格等'/>
+    </li>
+    <li class='row'>
+         <span class='text'>坐标/商圈</span><input type='text' placeholder='如：中关村'/>
+    </li>
+     <li class='row'>
+         <span class='text'>最高学历</span>
+		 <span>本科</span><img src='down.png' class='button school'/>
+		 
+     </li>
+     <li class='row'>
+         <span class='text'>行业、职务期待</span><input type='text' placeholder='如 国企 外资 上市公司等'/>
+     </li>
+   
+    <li class='row'>
+         <span class='text'>税后年收入</span><input class='unit' type='text' placeholder='注意是税后哦~'/>
+    
+    </li>
+    <li class='row'>
+        <span class='text'>家庭背景期待</span><input class='taller' type='text' placeholder='如 小城镇 工薪家庭 非独生子女'/>
+    </li>
+    <li class='row'>
+        <span class='text'>特别补充</span><input class='taller' type='text' placeholder='比如 是否会做饭等'/>
+    </li>
+</ul>
+<input type='button' value='保存' id='save'/>
+<div id='float'></div>
+</body>
+</html>
