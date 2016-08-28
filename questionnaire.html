@@ -59,11 +59,11 @@ top:10px;
 display:none;
 background:white;
 }
-p#age{
+p.age{
 height:10%;
 }
 p.w{
-height:10%;
+height:20%;
 }
 input[type='button']{
 display:block;
@@ -84,7 +84,19 @@ window.onload=function(){
    var oImg=document.getElementsByTagName('img');
    var oDiv=document.getElementById('float');
    var oSave=document.getElementById('save');
-   var the
+   var oIn=document.getElementsByClassName('in');
+   var oSelect=document.getElementsByClassName('sel');
+   function subSelect(i){
+	for(var m=0;m<oSelect.length;m++){
+			oSelect[m].onclick=function(){
+				oIn[i].innerHTML=this.nextSibling.innerHTML;
+			}
+		}
+   }
+   function select(value1,value2,value3,i){
+		oDiv.innerHTML='<p class="w"><input type="radio" class="sel"/><span>'+value1+'</span></p><p class="w"><input type="radio" class="sel"/><span>'+value2+'</span></p><p class="w"><input type="radio" class="sel"/><span>'+value3+'</span></p>';
+		subSelect(i);
+   }
    for(var i=0;i<oImg.length;i++){
 	oImg[i].onclick=function(ev){
 	var ev=ev||event;
@@ -92,24 +104,37 @@ window.onload=function(){
 	oDiv.style.display='block';
 	document.body.style.background='rgba(0,0,0,0.3)';
   
-	if(this.className='weit'){
-		oDiv.innerHTML='';
-		oDiv.innerHTML='<p class="w"><input type="radio"/>胖胖哒</p><p class="w"><input type="radio"/>瘦瘦哒</p><p class="w"><input type="radio"/>不胖不瘦哒</p>'
-		
+	if(this.id=='weit'){
+		select('胖胖哒','瘦瘦哒','不胖不瘦哒',2)
 	}
-	if(this.className='school'){
-		oDiv.innerHTML='';
-		oDiv.innerHTML='<p class="w"><input type="radio"/>大专</p><p class="w"><input type="radio"/>本科</p><p class="w"><input type="radio"/>硕士研究僧</p>'
+	if(this.id=='school'){
+		select('大专','本科','硕士研究僧',3)
 	
 	}
-    if(this.className='age'){
+    if(this.id=='age1'){
+		oDiv.innerHTML='';
+        for(var j=0;j<10;j++){
+            
+            var oP=document.createElement('p');
+            oP.innerHTML='<input type="radio" class="sel"/><span>199'+j+'</span>';
+            oDiv.appendChild(oP);
+            oP.className='age';
+			
+			subSelect(0);
+			
+        }
+        
+    }
+	if(this.id=='age2'){
         oDiv.innerHTML='';
         for(var j=0;j<10;j++){
             
             var oP=document.createElement('p');
-            oP.innerHTML='<input type="radio"/>198'+j;
+            oP.innerHTML='<input type="radio" class="sel"/><span>198'+j+'</span>';
             oDiv.appendChild(oP);
-            oP.id='age';
+            oP.className='age';
+			
+			subSelect(1)
         }
         
     }
@@ -119,7 +144,10 @@ window.onload=function(){
 	oDiv.style.display='none';
 	document.body.style.background='transparent';
    }
-  console.log(document.cookie)
+  console.log(document.cookie);
+  oSave.onclick=function(){
+  alert('保存成功！')
+  }
 }
 
 </script>
@@ -128,9 +156,9 @@ window.onload=function(){
 <ul>
     <li class='row'>
         <span class='text'>出生年范围</span>
-		<span class='not'>1989</span><img src='down.png' class='button age'/>
+		<span class='not in'>1989</span><img src='down.png' class='button' id='age1'/>
 		<label>-</label>
-		<span class='not'>1989</span><img src='down.png' class='button age'/>
+		<span class='not in'>1989</span><img src='down.png' class='button' id='age2'/>
 		<label>年</label> 
     </li>
     <li class='row'>
@@ -139,7 +167,7 @@ window.onload=function(){
     </li>
     <li class='row'>
         <span class='text'>胖瘦程度</span>
-        <span>请选择</span><img src='down.png' class='button weit'/>
+        <span class='in'>请选择</span><img src='down.png' class='button' id='weit'/>
     </li>
     <li class='row'>
         <span class='text'>星座</span><input type='text'/>
@@ -152,7 +180,7 @@ window.onload=function(){
     </li>
      <li class='row'>
          <span class='text'>最高学历</span>
-		 <span>本科</span><img src='down.png' class='button school'/>
+		 <span class='in'>本科</span><img src='down.png' class='button' id='school'/>
 		 
      </li>
      <li class='row'>
