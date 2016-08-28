@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <title>期望Ta</title>
-<meta http-equiv="Content-Type" name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,
-maximum-scale=1.0,target-densitydpi=device-dpi" charset="utf-8"/>
+<meta http-equiv="Content-Type" name="viewport" content="width=device-width,height=device-height,user-scalable=yes,initial-scale=1.0,minimum-scale=1.0,
+maximum-scale=3.0,target-densitydpi=device-dpi" charset="utf-8"/>
 <style>
 body,p,h1,h2,h3,h4,h5,h6,dl,dd{margin:0;font-size:12px;}
 ol,ul{list-style:none;margin:0;padding:0;}
@@ -55,7 +55,7 @@ width:80%;
 height:500px;
 position:absolute;
 left:10%;
-top:10px;
+top:30px;
 display:none;
 background:white;
 }
@@ -63,7 +63,8 @@ p.age{
 height:10%;
 }
 p.w{
-height:20%;
+height:15%;
+font-size:20px;
 }
 input[type='button']{
 display:block;
@@ -146,7 +147,11 @@ window.onload=function(){
    }
   console.log(document.cookie);
   oSave.onclick=function(){
-  alert('保存成功！')
+  ajax('get','', ,function(data){
+  
+  })
+  alert('保存成功!');
+  
   }
 }
 
