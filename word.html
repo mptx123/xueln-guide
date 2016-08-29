@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+<title></title>
+<meta charset="utf-8"/>
+<style>
+body,p,h1,h2,h3,h4,h5,h6,dl,dd{margin:0;font-size:12px;}
+ol,ul{list-style:none;margin:0;padding:0;}
+a{text-decoration:none}
+img{border:none}
+
+
+li{
+float:left;
+margin:10px;
+}
+#wrap{
+border:2px solid black;
+}
+#wrap>li{
+height:300px;
+width:300px;
+}
+#wrap>li:nth-of-type(2){
+width:200px;
+text-align:center;
+}
+#wrap>li:nth-of-type(3){
+background:#ccc;
+}
+textarea{
+width:100%;
+height:100%;
+background:orange;
+}
+input{
+background:pink;
+}
+.word{
+text-align:center;
+}
+#sub li{
+width:20px;
+height:20px;
+background:yellow;
+}
+#sub li.bg{
+background:red;
+}
+</style>
+<script>
+window.onload=function(){
+var oBtn=document.getElementsByTagName("input")[0];
+var oTxt=document.getElementsByTagName("textarea")[0];
+var oAdd=document.getElementById("add");
+var oAll=document.getElementById("all");
+var oZ=document.getElementById("zi");
+var oS=document.getElementById("sub");
+var oLi=oS.getElementsByTagName("li");
+
+oBtn.onclick=function(){
+var str=oTxt.value;
+var atr=str.split("");
+oAll.innerHTML=atr.length;
+var timer;
+var i=0;
+clearInterval(timer);
+timer=setInterval(function(){
+
+var temp=atr.shift();
+oTxt.value=atr.join("");
+oAdd.innerHTML+=temp;
+oZ.innerHTML=i;
+for(var j=0;j<oLi.length;j++){
+oLi[j].className=""
+}
+oLi[i%5].className="bg";
+i++;
+if(atr.length==0){
+    clearInterval(timer)
+}
+},500)
+
+
+
+}
+
+
+
+}
+
+</script>
+</head>
+<body>
+<ul id="wrap">
+<li>
+<textarea></textarea>
+</li>
+<li>
+<input type="button" value="move words to the right"/>
+<p class="word"><span id="zi">0</span>/<span id="all">0</span></p>
+<ul id="sub">
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+
+</ul>
+</li>
+<li id="add">
+</li>
+</ul>
+</body>
+</html>
