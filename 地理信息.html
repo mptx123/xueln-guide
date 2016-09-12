@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title></title>
+<meta content="text/html;charset=utf-8"/>
+<style>
+body,p,h1,h2,h3,h4,h5,h6,dl,dd{margin:0;font-size:12px;}
+ol,ul{list-style:none;margin:0;padding:0;}
+pre,form,input,textarea,th,td,select{margin:0;padding:0;}
+em{font-style:normal;}
+a{text-decoration:none}
+img{border:none;vertical-align:top;}
+table{border-collapse:collapse;}
+textarea{resize:none;overflow:auto;}
+
+
+
+
+</style>
+
+<link href='' type='text/css' rel='stylesheet'/>
+<link href='' rel='icon'/>
+<script>
+window.onload=function(){
+var oBtn=document.getElementsByTagName('input')[0];
+var oTxt=document.getElementsByTagName('textarea')[0];
+oBtn.onclick=function(){
+
+navigator.geolocation.getCurrentPosition(function(po){
+oTxt.innerHTML='¾­¶È'+po.coords.longitude
+})
+}
+
+}
+
+
+</script>
+</head>
+<body>
+<input type='button' value='ÇëÇó'/>
+<textarea></textarea>
+</body>
+</html>
