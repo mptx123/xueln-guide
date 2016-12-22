@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>瀑布流</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="bootstrap.css" type="text/css" rel="stylesheet"/>
+<link href="bootstrap.css.map" type="text/css" rel="stylesheet"/>
+<script src="jquery-1.11.1.js"></script>
+<script src="bootstrap.js"></script>
+
+<style>
+body,p,h1,h2,h3,h4,h5,h6,dl,dd{margin:0;font-size:12px;}
+ol,ul{list-style:none;margin:0;padding:0;}
+a{text-decoration:none}
+img{border:none}
+
+#ul1{
+   
+    margin:50px auto;
+   
+}
+
+li img{
+    width:100%;
+}
+li div{
+    border:1px solid black;
+   width:100%;
+ background: yellow;
+}
+
+
+</style>
+
+<script src='ajax.js'></script>
+<script>
+window.onload=function(){
+    var oUl=document.getElementById('ul1');
+    var oLi=document.getElementsByTagName('li');
+    var t;
+    var cPage=1;
+    var open=true;
+    function sort(){
+    var index=0;
+    var target=oLi[0].offsetHeight;
+    for(var f=1;f<oLi.length;f++){
+        if(oLi[f].offsetHeight<target){
+            index=f;
+            target=oLi[f].offsetHeight;
+        }
+    }
+    return index;
+}
+    function load(){
+         ajax('get','getPics.php','cpage='+cPage,function(data){
+        var data=JSON.parse(data);
+         if(data.length!=0){
+        for(var j=0;j<data.length;j++){
+            t=sort();
+            var oDiv=document.createElement('div');
+   //oDiv.style.height=parseInt(data[j].height)+'px';
+
+             oDiv.innerHTML='<img src="'+data[j].preview+'"/><p>'+data[j].title+'</p>';
+             oLi[t].appendChild(oDiv);
+             var oImg=oDiv.getElementsByTagName('img')[0];
+             oImg.style.height=parseInt(data[j].height)*oLi[t].offsetWidth/parseInt(data[j].width)+'px';
+} 
+}
+else{
+    return
+}
+b=true;
+})
+
+    }
+         load();
+window.onscroll=function(){
+    t=sort();
+    var st=document.body.scrollTop||document.documentElement.scrollTop;
+    if(oLi[t].offsetTop+oLi[t].offsetHeight<st+document.documentElement.clientHeight){
+        if(b){
+        b=!b;
+        cPage++;
+        load();
+       
+    }
+            
+    }
+}
+
+
+    
+   
+/* for(var i;i<oImg.length;i++){
+        oImg[i].src=atr[i].image;
+        oP[i].innerHTML=atr[i].title;
+    } */
+
+
+}
+
+
+</script>
+</head>
+<body class='container-fluid'>
+<ul id="ul1" class='col-sm-12 col-md-12 col-lg-12'>
+<li class='col-sm-4 col-md-3 col-lg-2'>
+    
+</li>
+<li class='col-sm-4 col-md-3 col-lg-2'>
+    
+</li>
+<li class='col-sm-4 col-md-3 col-lg-2'>
+   
+</li>
+<li class='col-sm-4 col-md-3 col-lg-2'>
+    
+</li>
+<li class='col-sm-4 col-md-3 col-lg-2'>
+    
+</li>
+<li class='col-sm-4 col-md-3 col-lg-2'>
+   
+</li>
+
+</ul>
+</body>
+</html>
