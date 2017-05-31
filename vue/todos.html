@@ -1,0 +1,192 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" href="css/index.css">
+
+<style>
+
+/* reset */
+body,p,h1,h2,h3,h4,h5,h6,dl,dd{margin:0;font-size:12px;font-family:Arial,'黑体',Simhei,'华文细黑',STXihei}
+ol,ul{list-style:none;margin:0;padding:0;}
+pre,form,textarea,th,td,select{margin:0;padding:0;}
+em{font-style:normal;}
+a{text-decoration:none}
+img{border:none;vertical-align:top;}
+table{border-collapse:collapse;}
+textarea{resize:none;overflow:auto;}
+input,textarea{border:none;outline:none}
+/* end reset */
+/* public */
+/* end public */
+
+
+</style>
+<script src='js/vue.js'></script>
+
+</head>
+<body>
+ <div class="page-top">
+    <div class="page-content">
+        <h2>任务计划列表</h2>
+    </div>
+ </div>
+ <div class="main">
+    <h3 class="big-title">添加任务：</h3>
+    <input 
+        placeholder="例如：吃饭睡觉打豆豆；    提示：+回车即可添加任务" 
+        class="task-input"
+        type="text"
+        v-on:keyup.enter="addTodo"
+        v-model="inputing"
+         />
+    <ul class="task-count" v-show="list.length">
+        <li>{{noCheckLength}}个任务未完成</li>
+        <li class="action">
+            <a :class="{active:filterTask==='all'}" href="#all">所有任务</a>
+            <a href="#undo" :class="{active:filterTask=='undo'}">未完成的任务</a>
+            <a href="#done" :class="{active:filterTask=='done'}">完成的任务</a>
+        </li>
+    </ul>
+    <h3 class="big-title">任务列表：</h3>
+    <div class="tasks">
+        <span class="no-task-tip" v-show="!list.length">还没有添加任何任务</span>
+        <ul class="todo-list">
+            <li class="todo" :class="{completed:item.isChecked,editing:item===editing}" v-for="item in filterData">
+                <div class="view">
+                    <input class="toggle" type="checkbox" v-model="item.isChecked"/>
+                    <label @dblclick="editTodo(item)">{{item.title}}</label>
+                    <button class="destroy" v-on:click="del(item,$element)"></button>
+                </div>
+                <input 
+                v-focus="editing===item" 
+                type="text" 
+                class="edit" 
+                v-model="item.title"
+                @blur="editedover(item)" 
+                @keyup.13="editedover(item)" 
+                @keyup.esc="cancelEdit(item)"
+                />
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    var store={
+        save(key,value){
+            localStorage.setItem(key,JSON.stringify(value))
+            },
+        fetch(key){
+            return JSON.parse(localStorage.getItem(key)) || [];
+        }
+    };
+    /*
+    var list=[
+        {
+            title:"学习",
+            isChecked:false
+        },
+        {
+            title:"相亲",
+            isChecked:true
+        }
+    ];*/
+    var list=store.fetch('storage')
+    var filter={
+                    all:function(list){
+                        return list;
+                    },
+                    undo:function(list){
+                        return list.filter(function(ele){
+                                return ele.isChecked;
+                            })
+                    },
+                    done:function(list){
+                        return list.filter(function(ele){
+                                return !ele.isChecked;
+                            })
+                    }
+                }
+    var vm=new Vue({
+        el:'.main',
+        data:{
+            list:list,
+            inputing:"",
+            editing:'',
+            saveBefore:'',
+            filterTask:'all',
+            isActive:'all'
+            },
+        watch:{
+            list:{
+                handler:function(){
+                    store.save('storage',this.list);
+                },
+                deep:true
+        }
+
+            },
+        methods:{
+            addTodo:function (e){
+                
+                this.list.push({
+                    title:this.inputing,
+                    isChecked:false
+                    })
+                this.inputing="";
+                
+            },
+            del:function(i,e){
+                var ele=this.list.indexOf(i);
+                this.list.splice(ele,1)
+
+            },
+            editTodo:function(item){
+                this.editing=item;
+                this.saveBefore=item.title;
+            },
+            editedover:function(ele){
+                this.editing=""
+            },
+            cancelEdit:function(ele){
+                ele.title=this.saveBefore;
+                this.editing=""
+            }
+
+        },
+        computed:{
+            noCheckLength:function(){
+                return this.list.filter(function(item){
+                    return !item.isChecked
+                }).length
+                
+            },
+            filterData:function(){
+                
+
+                return filter[this.filterTask]?filter[this.filterTask](list):list;
+            }
+            },
+        directives:{
+            "focus":{
+                update:function(el,binding){
+                    if(binding.value){
+                        el.focus();
+                    }
+                }
+            }
+        }
+        });
+    function filterTask(){
+                vm.filterTask=vm.isActive=window.location.hash.slice(1);
+
+                console.log(vm.filterTask);
+            }
+            filterTask()
+    window.addEventListener('hashchange',filterTask)
+</script>
+</body>
+</html>
