@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+<head>
+<title></title>
+<meta charset="uft-8"/>
+<style>
+body,p,h1,h2,h3,h4,h5,h6,dl,dd{margin:0;font-size:12px;}
+ol,ul{list-style:none;margin:0;padding:0;}
+a{text-decoration:none}
+img{border:none}
+
+body{
+    width:1349px;
+	overflow:hidden;
+}
+
+.sun{
+width:100%;
+height:200px;
+margin:0 auto;
+background:radial-gradient(50% 50%,circle,white 0,white 10px,skyblue 100px);
+background:-webkit-radial-gradient(50% 50%,circle,white 0,white 10px,skyblue 100px);
+background:-moz-radial-gradient(50% 50%,circle,white 0,white 10px,skyblue 100px);
+background:-ms-radial-gradient(50% 50%,circle,white 0,white 10px,skyblue 100px);
+}
+
+
+.sky{
+width:100%;
+height:500px;
+background:linear-gradient(top,skyblue,white);
+background:-webkit-linear-gradient(top,skyblue,white);
+background:-moz-linear-gradient(top,skyblue,white 200px);
+background:-ms-linear-gradient(top,skyblue,white 200px);
+transform-style:preserve-3d;
+-moz-transform-style:preserve-3d;
+-webkit-transform-style:preserve-3d;
+-ms-transform-style:preserve-3d;
+perspective:50px;
+-moz-perspective:50px;
+-webkit-perspective:50px;
+-ms-perspective:50px;
+position:relative;
+}
+.sky:after{
+content:"";
+display:block;
+clear:both;
+height:0;
+width:0;
+margin:0;
+}
+.grass{
+float:left;
+width:100%;
+height:300px;
+margin-top:200px;
+background:url(img/flower.png) no-repeat 0 0px;
+background-size:cover;
+box-shadow:0 -5px 50px 10px #B15BFF;
+
+}
+#c1{
+position:relative;
+top:-500px;
+transform:scale(1);
+-webkit-transform:scale(1);
+-moz-transform:scale(1);
+-ms-transform:scale(1);
+}
+.eye1,.eye2{
+width:18px;
+height:5px;
+border:1px solid black;
+border-radius:50%;
+position:absolute;
+
+}
+.eye1{
+left:880px;
+top:60px;
+}
+.eye2{
+left:945px;
+top:60px;
+}
+
+.mouth{
+width:25px;
+height:8px;
+border:1px solid #FF0000;
+position:absolute;
+left:910px;
+top:110px;
+border-radius:50% 50% 100% 100%/30% 30% 190% 190%;
+background:linear-gradient(top,#FF0000,#FFD2D2,#FF0000);
+background:-webkit-linear-gradient(top,#FF0000 3px,#FFD2D2 4px,#FF0000);
+background:-moz-linear-gradient(top,#FF0000 3px,#FFD2D2 4px,#FF0000 6px);
+background:-ms-linear-gradient(top,#FF0000 3px,#FFD2D2 4px,#FF0000 6px);
+
+}
+
+.flower1
+</style>
+<script>
+window.onload=function(){
+var oC=document.getElementById("c1");
+var oGC=oC.getContext("2d");
+
+
+
+for(var j=0;j<150;j+=2){//头发
+oGC.beginPath();
+oGC.moveTo(850+j,25);
+oGC.bezierCurveTo(950+j,80,780+j,100,1000+j,300+Math.random()*20);
+oGC.stroke();
+
+}
+//oGC.translate(10);
+
+
+
+oGC.beginPath();//脸
+oGC.fillStyle="#FFF4C1";
+oGC.moveTo(850,50);
+oGC.quadraticCurveTo(925,220,1000,50);
+oGC.fill();
+
+oGC.beginPath();//头顶
+oGC.fillStyle="#FFF4C1";
+oGC.moveTo(850,50);
+oGC.quadraticCurveTo(925,0,1000,50);
+oGC.fill();
+
+
+
+for(var i=0;i<150;i+=4){//刘海
+oGC.beginPath();
+oGC.moveTo(850+i,25);
+oGC.quadraticCurveTo(840+i,40,852+i,55+Math.random()*10);
+oGC.stroke();
+}
+
+/* oGC.beginPath();//帽子
+oGC.moveTo(850,50);
+oGC.lineTo(925,-20);
+oGC.lineTo(1000,50);
+oGC.quadraticCurveTo(925,0,850,50);
+oGC.fillStyle="pink"
+oGC.fill(); */
+
+oGC.beginPath();//鼻子
+oGC.moveTo(925,70);
+oGC.lineTo(920,90);
+oGC.lineTo(925,95);
+oGC.stroke();
+
+oGC.beginPath();//左眼球
+oGC.moveTo(890,63);
+oGC.arc(890,63,3,0,360*Math.PI/180);
+oGC.stroke();
+oGC.fillStyle="black";
+oGC.fill();
+
+oGC.beginPath();//右眼球
+oGC.moveTo(955,63);
+oGC.arc(955,63,3,0,360*Math.PI/180);
+oGC.stroke();
+oGC.fillStyle="black";
+oGC.fill();
+
+oGC.beginPath();//脖子
+oGC.moveTo(905,130);
+oGC.quadraticCurveTo(920,170,850,180);
+oGC.lineTo(922,200);
+oGC.lineTo(995,180);
+oGC.quadraticCurveTo(930,170,940,130);
+oGC.fillStyle="#FFF4C1";
+oGC.fill();
+
+oGC.beginPath();//上衣
+oGC.moveTo(850,180);
+oGC.lineTo(922,200);
+oGC.lineTo(995,180);
+oGC.lineTo(1045,340);
+oGC.lineTo(800,340);
+oGC.lineJoin="round";
+oGC.closePath();
+oGC.fillStyle="pink";
+oGC.fill();
+
+oGC.beginPath();//裙子
+oGC.moveTo(850,340);
+oGC.lineTo(850,420);
+oGC.lineTo(995,420);
+oGC.lineTo(995,340);
+oGC.lineJoin="round";
+oGC.fillStyle="black";
+oGC.fill();
+
+oGC.beginPath();//左腿
+oGC.moveTo(900,420);
+oGC.quadraticCurveTo(885,410,900,540);
+oGC.lineTo(920,540);
+oGC.quadraticCurveTo(930,410,920,420);
+oGC.closePath();
+oGC.fillStyle="#FFF4C1";
+oGC.fill();
+
+var Img=oGC.getImageData(890,420,40,120);//右腿
+oGC.putImageData(Img,930,420);
+
+
+
+
+
+var oImg=new Image();
+oImg.src="img/shoes.jpg";
+oImg.onload=function(){
+oGC.drawImage(oImg,870,540,80,80);
+oGC.drawImage(oImg,930,540,80,80);
+
+}
+
+
+
+
+
+}
+
+
+
+
+</script>
+</head>
+<body>
+<audio autoplay="autoplay" loop="loop">
+	<source src="img/songs/girls.mp3"/>
+</audio>
+<div class="sun"></div>
+<div class="sky">
+	<div class="grass"></div>
+	<canvas id="c1" width="1200" height="800">
+	
+	</canvas>
+	<div class="eye1"></div>
+	<div class="eye2"></div>
+	<div class="mouth"></div>
+	
+</div>
+
+
+
+</body>
+</html>

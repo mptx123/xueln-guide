@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<style>
+body,p,h1,h2,h3,h4,h5,h6,dl,dd{margin:0;font-size:12px;}
+ol,ul{list-style:none;margin:0;padding:0;}
+a{text-decoration:none}
+img{border:none}
+
+.common{
+border:1px solid black;
+width:100px;
+height:100px;
+margin:5px;
+float:left;
+box-sizing:border-box;
+padding:5px;
+}
+
+ul{
+width:330px;
+height:330px;
+border:1px solid black;
+}
+
+.red{
+background:red;
+
+}
+</style>
+<script src="js/jquery-1.11.1.js"></script>
+<script>
+
+$(function(){
+    var timer;
+$("input").click(function(){
+
+$(this).attr('disabled','true');
+ var a=0;
+ 
+timer=setInterval(function(){
+    var i=-1;
+
+if(a==4){
+        clearInterval(timer);
+        var b=$('ul').find('.red').index()+1
+        alert("恭喜你中了"+b+"等奖")
+    }
+else{
+  
+    i=i+Math.round(Math.random()*8+1);
+     a++;
+    $('li').eq(i).addClass("red").siblings('li').removeClass('red');
+   
+}
+}, 300)
+
+
+
+
+
+
+})
+
+})
+</script>
+</head>
+<body>
+<input type="button" value="抽奖"/>
+<ul>
+	<li class="common">一等奖</li>
+	<li class="common">二等奖</li>
+	<li class="common">三等奖</li>
+	<li class="common">四等奖</li>
+	<li class="common">五等奖</li>
+	<li class="common">六等奖</li>
+	<li class="common">七等奖</li>
+	<li class="common">八等奖</li>
+	<li class="common">九等奖</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<div id='iListAll'>
+<span class='iNumber'>1</span>
+<dl class='iList'>
+<dt>绿色经济</dt>
+<dd>基于信息技术</dd>
+</dl>
+<span class='iNumber'>2</span>
+<dl class='iList'>
+<dt>互联网技术</dt>
+<dd>行业经验</dd>
+</dl>
+<span class='iNumber'>3</span>
+<dl class='iList'>
+<dt>海量</dt>
+<dd>腾讯</dd>
+</dl>
+<span class='iNumber'>4</span>
+<dl class='iList'>
+<dt>专注</dt>
+<dd>腾讯</dd>
+</dl>
+<span class='iNumber'>5</span>
+<dl class='iList'>
+<dt>企业</dt>
+<dd>企业</dd>
+</dl>
+<span class='iNumber'>6</span>
+<dl class='iList'>
+<dt>打造</dt>
+<dd>企业</dd>
+</dl>
+</div>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title></title>
+<meta content="text/html;charset=utf-8"/>
+<style>
+body,p,h1,h2,h3,h4,h5,h6,dl,dd{margin:0;font-size:12px;}
+ol,ul{list-style:none;margin:0;padding:0;}
+pre,form,input,textarea,th,td,select{margin:0;padding:0;}
+em{font-style:normal;}
+a{text-decoration:none}
+img{border:none;vertical-align:top;}
+table{border-collapse:collapse;}
+textarea{resize:none;overflow:auto;}
+input{border:none;
+background:transparent;}
+
+.goods > li{
+float:left;
+margin-left:10px;
+}
+.goods:after{
+content:"";
+display:block;
+clear:both;
+}
+img{
+width:200px;
+height:200px;
+}
+.goods > li,.shopping{
+border:1px solid black;
+}
+.goods li ul li,.shopping li{
+border-bottom:1px dotted black;
+}
+.shopping{
+width:800px;
+height:200px;
+overflow:auto;
+margin-top:100px;
+}
+#summary{
+text-align:right;
+}
+.book{
+margin-left:20px;
+margin-right:20px;
+}
+</style>
+<script src=''></script>
+<link href='' type='text/css' rel='stylesheet'/>
+<link href='' rel='icon'/>
+<script>
+window.onload=function(){
+
+var oGoods=document.getElementsByClassName('goods')[0];
+var oDrag=oGoods.getElementsByClassName('drag');
+var oShopping=document.getElementsByClassName('shopping')[0];
+var sum=document.getElementById('summary');
+var json={};
+for(var i=0;i<oDrag.length;i++){
+
+oDrag[i].ondragstart=function(ev){
+
+var ev=ev||event;
+var name=this.children[0].children[1].innerHTML;
+var price=this.children[0].children[2].innerHTML;
+ev.dataTransfer.setData('name',name);
+ev.dataTransfer.setData('value',price);
+
+ev.dataTransfer.setDragImage(this,0,0)
+}
+
+
+}
+
+oShopping.ondragover=function(ev){
+var ev=ev||event;
+ev.preventDefault();
+}
+oShopping.ondrop=function(ev){
+var summa=0;
+var ev=ev||event;
+ev.preventDefault();
+
+var book=ev.dataTransfer.getData("name");
+var price=ev.dataTransfer.getData("value");
+if(!json[book]){
+
+var oLi=document.createElement('li');
+this.insertBefore(oLi,sum);
+oLi.innerHTML='<span class="num">1</span><span class="book">'+book+'</span><span class="tocount">'
++price+'</span>';
+json[book]=1
+}
+else{
+var oBook=document.getElementsByClassName('book');
+var oNum=document.getElementsByClassName('num');
+for(var n=0;n<oBook.length;n++){
+if(oBook[n].innerHTML==book){
+oNum[n].innerHTML=parseInt(oNum[n].innerHTML)+1;
+}
+}
+}
+
+
+
+for(var j=0;j<document.getElementsByClassName('tocount').length;j++){
+summa+=parseInt(document.getElementsByClassName('tocount')[j].innerHTML)*parseInt(document.getElementsByClassName('num')[j].innerHTML);
+}
+sum.innerHTML='总价是'+summa+'￥';
+}
+
+
+}
+
+
+</script>
+</head>
+<body>
+
+<ul class='goods'>
+<li draggable='true' class='drag'>
+<ul>
+<li><img src='img/img1.jpg'/></li>
+<li>javascript语言精粹</li>
+<li>40￥</li>
+</ul>
+</li>
+<li draggable='true' class='drag'>
+<ul>
+<li><img src='img/img2.jpg'/></li>
+<li>javascript权威指南</li>
+<li>120￥</li>
+</ul>
+</li>
+<li draggable='true' class='drag'>
+<ul>
+<li><img src='img/img3.jpg'/></li>
+<li>精通javascript</li>
+<li>35￥</li>
+</ul>
+</li>
+<li draggable='true' class='drag'>
+<ul>
+<li><img src='img/img4.jpg'/></li>
+<li>DOM编程艺术</li>
+<li>45￥</li>
+</ul>
+</li>
+</ul>
+
+<ul class='shopping'>
+
+<li id='summary'></li>
+</ul>
+</body>
+</html>

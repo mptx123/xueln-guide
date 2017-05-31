@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="viewport" content="width=device-width,height=device-height,
+user-scalable=no,initial-scale=1.0,minimum-scale=1.0,
+maximum-scale=1.0,target-densitydpi=device-dpi"/>
+<style>
+body,p,h1,h2,h3,h4,h5,h6,dl,dd{margin:0;font-size:12px;}
+ol,ul{list-style:none;margin:0;padding:0;}
+a{text-decoration:none}
+img{border:none}
+
+
+body{
+
+}
+span{
+display:inline-block;
+width:0.9rem;
+text-align:center;
+}
+ul{
+width:3rem;
+
+}
+li{
+ 
+    height:30px;
+   
+    line-height:30px;
+}
+
+
+
+</style>
+
+<link href='' type='text/css' rel='stylesheet'/>
+<script>
+window.onload=function(){
+	document.getElementsByTagName('html')[0].style.fontSize=window.screen.width/3+'px';
+    var oLi=document.getElementsByTagName('li');
+	var oName=document.getElementsByClassName('name');
+	var oAudio=document.getElementsByTagName('audio');
+	var oUl=document.getElementById('music');
+    for(var i=0;i<oLi.length;i++){
+      if(i%2==0){
+        oLi[i].style.background='#f0f0f0'
+      }
+        else{
+            oLi[i].style.background='#f3faff'
+        }
+    }
+    var oF=document.getElementById('all');
+    var oC=document.getElementById('reverse');
+    var oInput=document.getElementsByTagName('input')
+    oC.onclick=function(){
+        
+            for(var i=0;i<oInput.length-2;i++){
+                oInput[i].checked=!oInput[i].checked;
+            }  
+    }
+    oF.onclick=function(){
+        for(var i=0;i<oInput.length-2;i++){
+            if(oF.checked){
+                oInput[i].checked='checked'
+            }
+            else{
+                oInput[i].checked=''
+            }
+        }
+    }
+	
+	
+	for(var j=1;j<oName.length;j++){
+	oName[j].index=j;
+	oName[j].onclick=function(){
+	var n=this.index-1;
+	for(var m=0;m<oAudio.length;m++){
+	oAudio[m].pause();
+	}
+	oAudio[n].play();
+	}
+	}
+
+	for(var i=1;i<oLi.length-1;i++){
+	oLi[i].ondragstart=function(ev){
+	for(var h=1;h<oLi.length-1;h++){
+	this.index=h;
+	}
+	ev.dataTransfer.setData('index',this.index)
+	this.style.backgroundColor='black';
+	}
+	oLi[i].ondrag=function(){
+	oUl.removeChild(this);
+	}
+	for(var j=1;j<oLi.length-1;j++){
+	oLi[j].ondragover=function(ev){
+	ev.preventDefault()
+	}
+	oLi[j].ondrop=function(ev){
+	oUl.insertBefore(oLi[ev.dataTransfer.getData('index')],this)
+	}
+	}
+	}
+	
+	
+	}
+
+</script>
+</head>
+<body>
+
+<ul id='music'>
+   
+    <li>
+	<span class='name'>歌曲</span>
+	<span class='author'>歌手</span>
+	<span class='belong'>专辑</span>
+	</li>
+    <li draggable='true'>
+	<input type='checkbox'/>
+	<audio src='img/songs/star.mp3'></audio>
+	<span class='name'><a href='#'>来自星星的你</a></span>
+	<span class='author'>孝琳</span>
+	<span class='belong'>来自星星的你</span>
+	</li>
+    <li draggable='true'>
+	<input type='checkbox'/>
+	<audio src='img/songs/yezi.mp3'></audio>
+	<span class='name'><a href='#'>野子</a></span>
+	<span class='author'>野</span>
+	<span class='belong'>子</span>
+	</li>
+    <li draggable='true'>
+	<input type='checkbox'/>
+	<audio src='img/songs/yourself.mp3'></audio>
+	<span class='name'><a href='#'>只知道你</a></span>
+	<span class='author'>只知道</span>
+	<span class='belong'>你</span>
+	</li>
+    <li draggable='true'>
+	<input type='checkbox'/>
+	<audio src='img/songs/flower.mp3'></audio>
+	<span class='name'><a href='#'>天下无双</a></span>
+	<span class='author'>天下</span>
+	<span class='belong'>无双</span>
+	</li>
+	<li draggable='true'>
+	<input type='checkbox'/>
+	<audio src='img/songs/yang.mp3' loop='loop'></audio>
+	<span class='name'><a href='#'>痒</a></span>
+	<span class='author'>黄玲</span>
+	<span class='belong'>梦瑶</span>
+	</li>
+	<li><span><input type='checkbox' id='all'/>全选</span><span><input type='checkbox' id='reverse'/>反选</span></li>
+</ul>
+</body>
+</html>

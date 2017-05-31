@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title></title>
+<meta content="text/html;charset=utf-8"/>
+<style>
+body,p,h1,h2,h3,h4,h5,h6,dl,dd{margin:0;font-size:12px;}
+ol,ul{list-style:none;margin:0;padding:0;}
+pre,form,input,textarea,th,td,select{margin:0;padding:0;}
+em{font-style:normal;}
+a{text-decoration:none}
+img{border:none;vertical-align:top;}
+table{border-collapse:collapse;}
+textarea{resize:none;overflow:auto;}
+input{border:none;
+background:transparent;}
+
+textarea{
+width:200px;
+height:200px;
+margin-left:100px;
+
+}
+#wrap{
+position:absolute;
+left:0;
+top:0;
+bottom:0;
+width:100%;
+background:black;
+opacity:0.1;
+z-index:99;
+
+}
+
+.center{
+position:absolute;
+width:500px;
+left:calc(50% - 250px);
+top:calc(50% - 198px);
+z-index:999;
+
+}
+.bg{
+background:black;
+opacity:0.5
+}
+#all{
+display:none;
+}
+#content{
+border-radius:6px;
+margin-top:10px;
+height:350px;
+
+}
+ul li{
+float:left;
+}
+li{
+color:red;
+word-wrap:break-word
+}
+label{
+color:white;
+}
+#con{
+position:absolute;
+top:29px;
+width:100%;
+height:350px;
+overflow:scroll;
+}
+.bookList{
+margin:10px;
+float:left;
+}
+.bookList img{
+width:210px;
+height:200px;
+}
+</style>
+
+<link href='' type='text/css' rel='stylesheet'/>
+<link href='' rel='icon'/>
+<script>
+window.onload=function(){
+var oTxt=document.getElementsByTagName('textarea')[0];
+var oWrap=document.getElementById('wrap');
+var oContent=document.getElementById('con');
+var oAll=document.getElementById('all');
+var oImg=document.getElementsByTagName('img')[0];
+var obody=document.body||document.documentElement;
+oTxt.ondragenter=function(ev){
+this.innerHTML='';
+
+}
+oTxt.ondragleave=function(){
+this.innerHTML='将文件拖放到此处';
+}
+oTxt.ondragover=function(ev){
+var ev=ev||window.event;
+ev.preventDefault();
+
+}
+
+oTxt.ondrop=function(ev){
+var ev=ev||window.event;
+ev.preventDefault();
+
+
+for(var i=0;i<ev.dataTransfer.files.length;i++){
+if(ev.dataTransfer.files[i].type.indexOf('image')!=-1){
+oAll.style.display='block';
+var fd=new FileReader();
+fd.readAsDataURL(ev.dataTransfer.files[i]);
+fd.onload=function(){
+var oLi=document.createElement('li');
+oContent.appendChild(oLi);
+oLi.className='bookList'
+oLi.innerHTML='<img src="'+this.result+'"/>';
+}
+}
+else{
+alert('必须是图片');
+oTxt.innerHTML='将文件拖放到此处'
+}
+}
+
+
+}
+
+
+}
+
+
+</script>
+</head>
+<body>
+<img src='img/m1.jpg' style='display:none'/>
+<textarea>将文件拖拽到此处</textarea>
+<div id='all'>
+<div id='wrap'>
+
+</div>
+<div class='center'>
+<div class='title bg'>
+<label>请选择相册</label>
+<select>
+<option>快速上传</option>
+<option>龟速上传</option>
+</select>
+</div>
+<div id='content' class='bg'>
+</div>
+<ul id='con'>
+
+</ul>
+</div>
+</div>
+</body>
+</html>
