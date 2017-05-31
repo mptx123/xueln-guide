@@ -1,0 +1,996 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="viewport" content="width=640,height=device-height,target-densitydpi=device-dpi"/>
+<style>
+body,p,h1,h2,h3,h4,h5,h6,dl,dd{margin:0;font-size:20px;font-weight: normal;}
+ol,ul{list-style:none;margin:0;padding:0;}
+pre,form,textarea,th,td,select{margin:0;padding:0;}
+em{font-style:normal;}
+a{text-decoration:none}
+img{border:none;vertical-align:top;}
+table{border-collapse:collapse;}
+textarea{resize:none;overflow:auto;border:none}
+input,textarea{border:none;outline:none}
+
+/* public*/
+
+.page{
+width:100%;
+height:100%;
+background:white;
+position:absolute;
+bottom:0;
+display:none;
+}
+.pageShow{
+display:block;
+}
+.page:nth-of-type(1){
+z-index:10;
+}
+.page:nth-of-type(2){
+z-index:9;
+}
+.page:nth-of-type(3){
+z-index:8;
+}
+.page:nth-of-type(4){
+z-index:7;
+}
+.page:nth-of-type(5){
+z-index:6;
+}
+
+.btn{
+    width:600px;
+    height:100px;
+    color:#fff;
+    background:#cacaca;
+    border-radius:8px;
+    margin-left:calc(50% - 300px);
+    -webkit-tap-highlight-color:red;
+}
+.ok{
+    color:white;
+    background:#3c9bbb;
+}
+.alert{
+    margin-top:20px;
+    font-size:18px;
+    text-align: center;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    transform-origin:bottom;
+    -webkit-transform-origin:bottom;
+    transition:0.5s;
+}
+/* end public */
+
+/* page1 */
+#welcome{
+    transition:0.5s;
+}
+#tree{
+opacity:0;
+position:absolute;
+top:200px;
+width:640px;
+
+}
+#cloud{
+position:absolute;
+width:100%;
+height:100%;
+top:0;
+left:50px;
+opacity:0;
+}
+#cloud img{
+position:absolute;
+
+}
+#cloud img:nth-of-type(1){
+width:112px;
+height:84px;
+left:200px;
+top:200px;
+}
+#cloud img:nth-of-type(2){
+width:50px;
+height:50px;
+left:350px;
+top:100px;
+}
+#cloud img:nth-of-type(3){
+width:80px;
+height:80px;
+left:500px;
+top:0;
+}
+
+#tree-blow{
+position:absolute;
+top:620px;
+opacity:0;
+width:640px;
+}
+#tree-blow #shake{
+position:absolute;
+right:80px;
+top:10px;
+}
+#word{
+position:absolute;
+top:630px;
+opacity:0;
+width:640px;
+}
+#logo{
+position:absolute;
+top:830px;
+left:calc(50% - 250px);
+opacity:0;
+}
+.content{
+position:absolute;
+left:calc(50% - 320px);
+top:100px;
+}
+
+
+
+@-webkit-keyFrames moveTree{ 
+50%{
+    opacity:0.2
+}
+100%{top:0;opacity:1}
+
+}
+
+@-webkit-keyFrames moveBlow{ 
+    50%{
+    opacity:0.2
+}
+100%{top:420px;opacity:1}
+
+}
+
+@-webkit-keyFrames moveWord{ 
+    50%{
+    opacity:0.2
+}
+100%{top:530px;opacity:1}
+
+}
+@-webkit-keyFrames moveLogo{ 
+50%{
+    opacity:0.2
+}
+100%{opacity:1}
+
+}
+@-webkit-keyFrames moveShake{
+15%{
+-webkit-transform:rotate(30deg)
+} 
+25%{
+-webkit-transform:rotate(-30deg)
+}
+45%{
+-webkit-transform:rotate(10deg)
+}
+65%{
+-webkit-transform:rotate(-10deg)
+}
+85%{
+   -webkit-transform:rotate(5deg) 
+}
+100%{
+-webkit-transform:rotate(0deg)
+}
+
+}
+@-webkit-keyFrames moveCloud{ 
+
+100%{
+    -webkit-transform:translateX(-100px);
+    opacity:1}
+
+} 
+#tree{
+-webkit-animation:0.5s moveTree;
+-webkit-animation-fill-mode:forwards;
+}
+#tree-blow{
+-webkit-animation:0.5s 0.5s moveBlow;
+-webkit-animation-fill-mode:forwards;
+}
+#word{
+-webkit-animation:0.5s 1s moveWord;
+-webkit-animation-fill-mode:forwards;
+}
+#logo{
+-webkit-animation:0.5s 1.5s moveLogo;
+-webkit-animation-fill-mode:forwards;
+}
+#shake{
+-webkit-animation:0.3s 2s moveShake ease-out;
+-webkit-animation-fill-mode:forwards;
+-webkit-transform-origin:left bottom;
+}
+#cloud{
+-webkit-animation:1s 2.3s moveCloud linear infinite alternate;
+-webkit-animation-fill-mode:forwards;
+}
+/* end page1 */
+/* page2 */
+#remark{
+    opacity:0
+}
+.container{
+position:relative;
+width:640px;
+overflow:hidden;
+height:416px;
+}
+.movePic{
+position:absolute;
+left:0;
+top:0;
+height:416px;
+width:10000px;
+transition:1s;
+}
+.movePic li{
+float:left;
+}
+.movePic li img{
+    width:640px;
+    height:416px;
+}
+.wordMark{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:100px;
+    background:linear-gradient(bottom,rgba(0,0,0,0.8),rgba(0,0,0,0));
+    background:-webkit-linear-gradient(bottom,rgba(0,0,0,0.9) 0,rgba(0,0,0,0.8) 50%,rgba(0,0,0,0));
+    opacity:0.8;
+}
+.moveWord{
+position:absolute;
+bottom:0;
+right:0;
+}
+.moveWord li{
+float:left;
+width:20px;
+height:20px;
+border-radius:10px;
+margin:10px;
+background:white;
+
+}
+.moveWord li.change{
+background:orange;
+}
+.desc{
+position:absolute;
+font-size: 30px;
+left:10px;
+bottom:10px;
+color:orange;
+font-weight:bold;
+}
+.star{
+display:inline-block;
+width:38px;
+height:36px;
+margin:10px;
+background:url(img/star.png) no-repeat -38px 0;
+transition:0.1s ease-in;
+}
+.score dl{
+    padding:10px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.score dt{
+  font-size:20px;
+  padding-bottom: 10px;
+}
+.radioRemark span{
+    float:left;
+    margin:10px;
+    border-radius: 20px;
+    padding:10px;
+    background:#fefefe;
+    border:1px solid #cdd6e1;
+}
+.radioRemark:after{
+    content:"";
+    clear:both;
+    display:block;
+}
+.radioRemark h2{
+    font-size:20px;
+    padding:10px;
+}
+.radioRemark input{
+    display:none;
+}
+.radioRemark input:checked+span{
+    background:#3c9bbb;
+    border-color:#3c9bbb;
+    color:#ffffff;
+}
+#remark{
+    transition:0.5s;
+}
+
+#remark .btn:active{
+     background:#ACD6FF;
+}
+
+
+@-webkit-keyFrames moveShadow{
+    20%{
+        box-shadow: 0 0 2px 1px rgba(230,0,18,0.6),0 0 4px 1px rgba(230,0,18,0.5);
+    }
+    40%{
+        box-shadow: 0 0 2px 1px rgba(230,0,18,0.6),0 0 4px 1px rgba(230,0,18,0.5),0 0 6px 1px rgba(230,0,18,0.4);
+    }
+    60%{
+        box-shadow: 0 0 2px 1px rgba(230,0,18,0.6),0 0 4px 1px rgba(230,0,18,0.5),0 0 6px 1px rgba(230,0,18,0.4),0 0 8px 8px rgba(230,0,18,0.3);
+    }
+    80%{
+        box-shadow: 0 0 2px 1px rgba(230,0,18,0.6),0 0 4px 1px rgba(230,0,18,0.5),0 0 6px 1px rgba(230,0,18,0.4),0 0 8px 1px rgba(230,0,18,0.3),0 0 12px 2px rgba(230,0,18,0.3);
+    }
+    100%{
+         box-shadow: 0 0 2px 2px rgba(230,0,18,0.6),0 0 4px 4px rgba(230,0,18,0.5),0 0 6px 6px rgba(230,0,18,0.4),0 0 8px 8px rgba(230,0,18,0.3),0 0 12px 12px rgba(230,0,18,0.3),0 0 15px 15px rgba(230,0,18,0.2);
+    }
+}
+.tips{
+    position:absolute;
+    color:white;
+    padding:11px 11px;
+    border-radius:39px;
+    width:56px;
+    height:56px;
+    letter-spacing: 2px;
+    text-align: center;
+    line-height:28px;
+    font-size:22px;
+    right:20px;
+    top:20px;
+    background:rgba(230,0,18,0.6);
+    box-shadow: 0 0 0 rgba(230,0,18,0.6);
+    -webkit-animation: 2s moveShadow linear infinite alternate;
+}
+#wrap{
+    width:100%;
+    height:100%;
+    position:absolute;
+    bottom:0;
+    transition:0.5s;
+   
+}
+/* end page2 */
+/* page3 */
+#mark{
+    background:black;
+    opacity:0;
+    transition:0.5s opacity;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    position:absolute;
+    display:none;
+
+ }
+#mark img{
+   position:absolute;
+   top:calc(50% - 100px);
+   left:calc(50% - 167px)
+}
+/* end page3 */
+/* page4 */
+#news{
+    opacity:0;
+    transition:0.5s;
+    background:#eeeeee;
+}
+#news h1{
+    font-size:28px;
+    padding:10px;
+}
+#news label{
+    float:left;
+    width:49%;
+    height:188px;
+    background:white;
+    text-align: center;
+    background-size:100px 100px;
+    background-repeat: no-repeat;
+    background-position:50% 20px ;
+}
+#news label span{
+    position:relative;
+    top:168px;
+
+}
+#news input[type=file]{
+    width:100%;
+    height:100%;
+    display:none;
+}
+#news label:nth-of-type(1){
+    margin-left:1%;
+    background-image:url(img/camera1.png);
+}
+#news label:nth-of-type(2){
+    background-image:url(img/camera2.png);
+}
+#news .btn{
+    margin-top:50px;
+}
+/* end page4*/
+/* page5 */
+#load{
+    opacity:0;
+    background:#eeeeee;
+}
+#load .radioRemark{
+    background:url(img/4.jpg) no-repeat 0 0;
+    width:640px;
+    height:416px;
+    background-size:cover;
+}
+#load textarea{
+
+    width:100%;
+    margin-top:20px;
+}
+#load input[type=tel]{
+     width:100%;
+      margin-top:20px;
+      height:30px;
+}
+#load .radioRemark span{
+    background:transparent;
+}
+/* end page5 */
+/*over page*/
+#over .btn{
+    margin-left:calc(50% - 250px);
+}
+#over{
+    opacity:0;
+}
+</style>
+
+<link href='' type='text/css' rel='stylesheet'/>
+<link href='' rel='icon'/>
+<script>
+window.onload=function(){
+    var tree=document.getElementById('tree');
+    var treeBelow=document.getElementById('tree-blow');
+    var word=document.getElementById('word');
+    var logo=document.getElementById('logo');
+    var shake=document.getElementById('shake');
+    var cloud=document.getElementById('cloud');
+    var welcome=document.getElementById('welcome');
+    var remark=document.getElementById('remark');
+    var oMovePic=document.getElementsByClassName('movePic')[0]
+    var oMoveWord=document.getElementsByClassName('moveWord')[0]
+    var point=oMoveWord.getElementsByTagName('li')
+    var image=oMovePic.getElementsByTagName('li')
+    var stars=document.getElementsByClassName('stars')[0]
+    var remark=document.getElementById('remark');
+    var remarkBtn=remark.getElementsByClassName('btn')[0]
+    var hidden=document.querySelectorAll('input[type=hidden]')
+    var mark=document.getElementById('mark');
+    var news=document.getElementById('news');
+    var alert=document.getElementsByClassName('alert')
+
+
+    function appear(pre,next,fn){//需要给next加0透明
+            next.style.transition=pre.style.transition='0.5s';
+            pre.style.opacity=0;
+            pre.addEventListener('transitionend',function(){
+                pre.className='page';
+                next.className+=' pageShow';
+                setTimeout(function(){
+                    next.style.opacity=1;
+
+                }, 14)
+                if(fn){
+                    fn()
+                }
+            })
+
+        }
+
+    function moveFive(){
+                        clearInterval(timerPage2)
+                        timerPage2=setInterval(function(){
+                        i++;
+                        oMovePic.style.left=-640*(i%5)+'px'
+                        for(var j=0;j<point.length;j++){
+                                point[j].className='';
+                            }
+                        point[i%5].className='change'
+                        },2000)
+                        }
+
+    /* function end(obj,json){
+        obj.addEventListener('webkitAnimationend',function(){
+            for(var name in json){
+                 obj.style[name]=json[name]+''
+            }
+            alert('123')
+           
+        },false)
+    }
+
+    end(tree,{top:0,opacity:1})
+    end(treeBelow,{top:'420px',opacity:1})
+    end(word,{top:'530px',opacity:1})
+    end(logo,{opacity:1})
+    end(shake,{right:'80px',top:'10px'})
+    end(cloud,{left:'-10px',opacity:1})
+    */
+    var timerPage2;
+    var i=0;
+    var bImgLoad=false;
+    var bTime=false;
+    var time=new Date().getTime();
+
+    function loadImg(){
+        for(var p=0;p<image.length;p++){
+            var oImg=new Image();
+            oImg.src='img/'+(p+1)+'.jpg'; 
+            image[p].appendChild(oImg)
+            
+        }
+        bImgLoad=true;
+        var tempTimer;
+        clearInterval(tempTimer)
+        tempTimer=setInterval(function(){
+            if(new Date().getTime()-time>=5000){
+                bTime=true;
+            }
+            if(bTime&&bImgLoad){
+                    clearInterval(tempTimer)
+                    appear(welcome,remark,moveFive)
+                    
+                   
+             
+            }
+    },1000)
+       
+        
+    }
+    
+
+
+   loadImg();
+   /* cloud.addEventListener('animationend',function(){
+
+        welcome.className='page';
+        remark.className+=' pageShow'
+        clearInterval(timerPage2)
+        timerPage2=setInterval(function(){
+            i++;
+            oMovePic.style.left=-640*(i%5)+'px'
+            for(var j=0;j<point.length;j++){
+                point[j].className='';
+            }
+            point[i%5].className='change'
+        },2000)
+   },false) */
+   
+
+   var x;
+   var iNow;
+   var num;
+   oMovePic.addEventListener('touchstart',function(ev){
+        var ev=ev||event;
+        clearInterval(timerPage2);
+        x=ev.changedTouches[0].pageX;
+        iNow=parseInt(-this.offsetLeft/640)
+   },false )
+ 
+   oMovePic.addEventListener('touchmove',function(ev){
+        clearInterval(timerPage2)
+        this.style.transition='0s'
+        var ev=ev||event;
+      
+            this.style.left=this.offsetLeft+ev.changedTouches[0].pageX-x+'px' 
+        
+        console.log(ev.changedTouches)
+    
+   },false)
+    oMovePic.addEventListener('touchend',function(ev){
+        var ev=ev||event;
+        for(var j=0;j<point.length;j++){
+                point[j].className='';
+            }
+       
+        num=Math.round((ev.changedTouches[0].pageX-x)/640)
+        this.style.transition='1s'
+        if(num<-iNow){
+            num=-iNow;
+        }
+        if(num>image.length-1-iNow){
+            num=image.length-1-iNow
+        }
+        this.style.left=-(num+iNow)*640+'px'
+        i=num+iNow;
+        point[i%5].className='change'
+        moveFive();
+         
+        
+    
+   },false)
+
+
+
+    var attrScore=[];//等待传给后台
+    var strScore=[];//等待传给后台
+   function score3(dd){
+        function score(objT){
+        var obj=objT.getElementsByClassName('star')
+        var oInput=objT.querySelector('input[type=hidden]')
+        for(var h=0;h<obj.length;h++){
+            obj[h].index=h;
+            obj[h].onclick=function(){
+                oInput.value=this.index+1;
+                attrScore.push(oInput.value)
+                for(var j=0;j<this.index+1;j++){
+                    obj[j].style.backgroundPosition='0 0';
+                }
+                for(var l=this.index+1;l<obj.length;l++){
+                    obj[l].style.backgroundPosition='-38px 0';
+                }
+            }
+        }
+    }
+        for(var k=0;k<dd.length;k++){
+            score(dd[k]);
+
+        }
+
+   }
+   
+    score3(stars.getElementsByTagName('dd'))
+    function info(information,n){
+            alert[n].style.WebkitTransform='scale(1)'
+            alert[n].style.transform='scale(1)'
+            alert[n].innerHTML=information;
+            //setTimeout(function(){
+                alert[n].addEventListener('transitionend',function(){
+                    alert[n].style.WebkitTransform='scale(0)'
+                    alert[n].style.transform='scale(0)'
+                })
+                alert[n].addEventListener('WebkitTransitionEnd',function(){
+                    alert[n].style.WebkitTransform='scale(0)'
+                    alert[n].style.transform='scale(0)'
+                })
+            //}, 1000)
+        }
+   
+    remarkBtn.onclick=function(){
+        
+    
+        function verify1(){
+            for(var i=0;i<hidden.length;i++){
+            if(hidden[i].value=='0'){
+                return false;
+                break;
+            }
+        }
+        return true;
+    }
+        function verify2(obj){
+            var radio=obj.querySelectorAll('input[type=radio]')
+            for(var j=0;j<radio.length;j++){
+                if(radio[j].checked){
+                    return true;
+                    break;
+                    strScore.push(radio[j].name)
+                }
+            }
+            
+            return false;
+        }
+       
+        if(!verify2(remark)){
+                info('请对导游进行评分',0)
+                
+       }
+        if(!verify1()){
+                info('请对景区进行评分',0)
+                
+               
+        }
+       
+        if(verify1()&&verify2(remark)){
+            console.log(attrScore)
+            console.log(strScore)
+           clearInterval(timerPage2)
+           var wrap=document.getElementById('wrap')
+                 mark.style.display='block';
+                 mark.style.opacity=0.8;
+                 wrap.style.filter=wrap.style.WebkitFilter='blur(20px)'
+   
+                setTimeout(function(){
+                    mark.style.display='none';
+                    wrap.style.filter=wrap.style.WebkitFilter='blur(0px)'
+                    appear(remark,news)
+                }, 1000)
+            
+            
+        }
+
+       
+        /*
+        mark.addEventListener('transitionend',function(){
+             mark.className='page'
+            remark.className='page'
+            news.className+=' pageShow'
+        })
+         mark.addEventListener('WebkitTransitionEnd',function(){
+             mark.className='page'
+            remark.className='page'
+            news.className+=' pageShow'
+        }) */
+    
+    }
+    function verify4(reg,information,obj){
+                var re=new RegExp(reg);
+                if(obj.files.length!=0){
+                    if(!re.test(obj.files[0].type)){
+                   
+                    info(information,1)
+                    return false;
+                    }
+                    else{
+                        return true;
+                    }
+                }else{
+                    return false;
+                }
+                
+    }
+    var btnNews=document.querySelector('#news .btn');
+    var file=document.querySelectorAll('#news input[type=file]')
+    file[0].onchange=function(){
+        verify4('video','请上传视频格式',this)
+        if(verify3){
+            btnNews.className+=' ok'
+        }
+    }
+    file[1].onchange=function(){
+        
+        verify4('image','请上传图片',this)
+         if(verify3){
+            btnNews.className+=' ok'
+        }
+    }
+    function verify3(){
+       if(verify4('video','请上传视频格式',file[0])||verify4('image','请上传图片',file[1])){
+        return true;
+       }
+        return false;
+    }
+    var load=document.getElementById('load')
+    btnNews.onclick=function(){
+        if(!verify3()){
+            info('请上传文件',1)
+        }
+       else{
+            appear(news,load)
+            
+       }
+        
+    }
+
+    var loadBtn=load.querySelector('.btn')
+    var loadRadio=load.querySelectorAll('input[type=radio]')
+    for(var i=0;i<loadRadio.length;i++){
+        loadRadio[i].onchange=function(){
+            loadBtn.className+=' ok'
+        }
+    }
+    var over=document.getElementById('over');
+    loadBtn.onclick=function(){
+        
+        appear(load,over)
+
+    }
+
+    var reBtn=over.querySelector('.btn')
+    reBtn.onclick=function(){
+       //remark.style.opacity=0;
+        //appear(over,remark,moveFive)
+        remark.style.opacity=1;
+        over.className='page';
+        remark.className+=' pageShow'
+        moveFive();
+    }
+    
+
+
+}
+
+
+</script>
+</head>
+<body>
+<section class='page pageShow' id='welcome'>
+    <div class='content'>
+    	<div id='tree'>
+    		<img src='img/tree.jpg'>
+    		<div id='cloud'>
+    			<img src='img/cloud.png'/>
+    			<img src='img/cloud.png'/>
+    			<img src='img/cloud.png'/>
+    		</div>
+    	</div>
+    	<div id='tree-blow'>
+    		<img src='img/title.png'/>
+    		<img src='img/shake.png' id='shake'/>
+    	</div>
+    	<div id='word'>
+    		<img src='img/title2.png'/>
+    	</div>
+    </div>
+    <h1 id='logo'>
+    	<img src='img/logo.png'/>
+    </h1>
+</section>
+<script>
+             
+</script>
+<section class='page' id='remark'>
+    <section id='wrap'>
+        <div class='container'>
+            <ul class='movePic'>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <a class='tips' href='#news'>
+                新闻线索
+            </a>
+            <div class='wordMark'>
+                <span class='desc'>成都九寨沟风景区</span>
+                <ul class='moveWord'>
+                    <li class='change'></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+        <div class='score'>
+            <dl class='stars'>
+                <dt>给景区评分</dt>
+                <dd>
+                    <span class='starWord'>综合印象</span>
+                    <span class='star'></span>
+                    <span class='star'></span>
+                    <span class='star'></span>
+                    <span class='star'></span>
+                    <span class='star'></span>
+                    <input type='hidden' value='0'/>
+                </dd>
+           
+                <dd>
+                    <span class='starWord'>服务指数</span>
+                    <span class='star'></span>
+                    <span class='star'></span>
+                    <span class='star'></span>
+                    <span class='star'></span>
+                    <span class='star'></span>
+                    <input type='hidden' value='0'/>
+                </dd>
+               
+                <dd>
+                    <span class='starWord'>消费指数</span>
+                    <span class='star'></span>
+                    <span class='star'></span>
+                    <span class='star'></span>
+                    <span class='star'></span>
+                    <span class='star'></span>
+                    <input type='hidden' value='0'/>
+                </dd>
+                
+            </dl>
+            <div class='radioRemark'>
+                <h2>给导游添加评价</h2>
+                <label>
+                    <input type='radio' name='tag' value='服务好'>
+                    <span>服务好</span>
+                </label>
+                <label>
+                    <input type='radio' name='tag' value='态度好'>
+                    <span>态度好</span>
+                </label>
+                <label>
+                    <input type='radio' name='tag' value='人品好'>
+                    <span>人品好</span>
+                </label>
+            </div>
+        </div>
+        <p class='alert'></p>
+        <input type='button' value='提交' class='btn ok'>
+    </section>
+    <section id='mark'>
+        <img src='img/mask.png'/>
+    </section>
+</section>
+
+<section class='page' id='news'>
+    <img src='img/news.png'/>
+    <h1>请上传旅游投诉以及突发事件线索</h1>
+    <label>
+    	<input type='file'>	
+        <span>导入视频</span>
+    </label>
+    <label>
+    	<input type='file'>
+        <span>上传照片</span>
+    </label>
+    <p class='alert'></p>
+    <input type='button' value='提交' class='btn'>
+</section>
+<section class='page' id='load'>
+    <div class='radioRemark'>
+        <h2>给视频添加标签</h2>
+            <label>
+                <input type='radio' name='tags' value='服务好'>
+                <span>服务好</span>
+            </label>
+            <label>
+                <input type='radio' name='tags' value='景色赞'>
+                <span>景色赞</span>
+            </label>
+            <label>
+                <input type='radio' name='tags' value='千篇一律'>
+                <span>千篇一律</span>
+            </label>
+
+    </div>
+    <textarea placeholder='(选填，说点什么呢)' rows='5'></textarea>
+    <input type='tel' placeholder='留下你的电话号码'/>
+    <input type='button' value='上传' class='btn'>
+</section>
+<section class='page' id='over'>
+    <div class='content'>
+        <div id='tree'>
+            <img src='img/tree.jpg'>
+            <div id='cloud'>
+                <img src='img/cloud.png'/>
+                <img src='img/cloud.png'/>
+                <img src='img/cloud.png'/>
+            </div>
+        </div>
+        <div id='tree-blow'>
+            <img src='img/thanks2.png'/>
+        </div>
+        <h1 id='logo'>
+            <input type='button' value='重新评价' class='btn ok'/>
+        </h1>
+        
+    </div>
+</section>
+</body>
+</html>
