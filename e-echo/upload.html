@@ -4,7 +4,7 @@
 <title></title>
 <meta content="text/html;charset=utf-8"/>
 <style>
-body,p,h1,h2,h3,h4,h5,h6,dl,dd{margin:0;font-size:12px;}
+body,p,h1,h2,h3,h4,h5,h6,dl,dd{margin:0;font-size:12px;font-family: Arial;}
 ol,ul{list-style:none;margin:0;padding:0;}
 pre,form,input,textarea,th,td,select{margin:0;padding:0;}
 em{font-style:normal;}
@@ -96,7 +96,7 @@ this.innerHTML='';
 
 }
 oTxt.ondragleave=function(){
-this.innerHTML='将文件拖放到此处';
+this.innerHTML='push file here';
 }
 oTxt.ondragover=function(ev){
 var ev=ev||window.event;
@@ -122,8 +122,8 @@ oLi.innerHTML='<img src="'+this.result+'"/>';
 }
 }
 else{
-alert('必须是图片');
-oTxt.innerHTML='将文件拖放到此处'
+alert('must be picture');
+oTxt.innerHTML='must be picture here'
 }
 }
 
@@ -138,17 +138,17 @@ oTxt.innerHTML='将文件拖放到此处'
 </head>
 <body>
 <img src='img/m1.jpg' style='display:none'/>
-<textarea>将文件拖拽到此处</textarea>
+<textarea>push file here</textarea>
 <div id='all'>
 <div id='wrap'>
 
 </div>
 <div class='center'>
 <div class='title bg'>
-<label>请选择相册</label>
+<label>new file</label>
 <select>
-<option>快速上传</option>
-<option>龟速上传</option>
+<option>faster upload</option>
+<option>slower upload</option>
 </select>
 </div>
 <div id='content' class='bg'>
