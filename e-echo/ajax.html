@@ -39,7 +39,7 @@ window.onload=function(){
     var oUl=document.getElementById('ul1');
     var oLi=document.getElementsByTagName('li');
     var t;
-    var cPage=1;
+    var cPage=0;
     var open=true;
     function sort(){
     var index=0;
@@ -418,7 +418,7 @@ window.onload=function(){
         {
             "id": 788968,
             "did": 0,
-            "thumbUrl": "http://img04.sogoucdn.com/app/a/100520020/c2ac1432b94047f0654228e04a7a3a6b",
+            "thumbUrl": "http://img03.sogoucdn.com/app/a/100520020/2bd26242b5f5bc5721c6069b08619ab5",
             "thumb_width": 640,
             "thumb_height": 360,
             "sthumbUrl": "http://img02.sogoucdn.com/app/a/100520024/e556bfe81ea250b5853610f184c78b95",
@@ -652,8 +652,10 @@ window.onload=function(){
 }
 		function staticImg(){
 			var datas=data.all_items;
+			console.log(datas.length)
 			if(datas.length!=0){
-                for(var j=0;j<datas.length;j++){
+                for(var j=cPage;j<datas.length;j++){
+                	console.log(cPage)
                     t=sort();
                     var oDiv=document.createElement('div');
            //oDiv.style.height=parseInt(data[j].height)+'px';
@@ -700,7 +702,8 @@ window.onscroll=function(){
     if(oLi[t].offsetTop+oLi[t].offsetHeight<st+document.documentElement.clientHeight){
         if(b){
         b=!b;
-        cPage++;
+        
+        cPage+=24;
         load();
        
     }
